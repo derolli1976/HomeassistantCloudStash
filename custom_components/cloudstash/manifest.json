@@ -1,0 +1,19 @@
+{
+  "domain": "cloudstash",
+  "name": "CloudStash - S3 Compatible Backup",
+  "codeowners": [
+    "@derolli1976"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "backup"
+  ],
+  "documentation": "https://github.com/derolli1976/HomeassistantS3CompatibleBackup",
+  "integration_type": "service",
+  "iot_class": "cloud_push",
+  "issue_tracker": "https://github.com/derolli1976/HomeassistantS3CompatibleBackup/issues",
+  "requirements": [
+    "aiobotocore>=2.6.0,<3.0.0"
+  ],
+  "version": "0.1.5"
+}

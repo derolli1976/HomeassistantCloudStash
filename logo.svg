@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4BA3E3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2176BD;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#E0EDF7;stop-opacity:0.95" />
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#34A853;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E7E34;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Cloud body -->
+  <path d="
+    M 400 280
+    A 80 80 0 0 0 340 180
+    A 100 100 0 0 0 160 180
+    A 80 80 0 0 0 112 280
+    Q 112 320 152 320
+    L 360 320
+    Q 400 320 400 280
+    Z
+  " fill="url(#cloudGrad)" />
+
+  <!-- Cloud shadow/depth -->
+  <path d="
+    M 152 320
+    L 360 320
+    Q 400 320 400 280
+    L 400 290
+    Q 400 330 360 330
+    L 152 330
+    Q 112 330 112 290
+    L 112 280
+    Q 112 320 152 320
+    Z
+  " fill="rgba(0,0,0,0.1)" />
+
+  <!-- Upload arrow (inside the cloud) -->
+  <g transform="translate(256, 240)">
+    <!-- Arrow shaft -->
+    <rect x="-16" y="-20" width="32" height="60" rx="4" fill="url(#arrowGrad)" />
+    <!-- Arrow head -->
+    <polygon points="0,-52 -34,-14 -18,-14 -18,-20 18,-20 18,-14 34,-14" fill="url(#arrowGrad)" />
+  </g>
+
+  <!-- Small shield/checkmark at bottom-right of cloud -->
+  <g transform="translate(370, 300)">
+    <circle cx="0" cy="0" r="30" fill="url(#shieldGrad)" stroke="white" stroke-width="4" />
+    <polyline points="-12,0 -4,10 14,-10" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- Text "CloudStash" below -->
+  <text x="256" y="400" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="56" font-weight="700" fill="#2176BD" letter-spacing="-1">
+    Cloud<tspan fill="#4BA3E3">Stash</tspan>
+  </text>
+
+  <!-- Subtitle -->
+  <text x="256" y="435" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#6B7280">
+    S3 Compatible Backup
+  </text>
+</svg>
