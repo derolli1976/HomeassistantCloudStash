@@ -11,7 +11,7 @@ jobs:
     name: Pytest
     strategy:
       matrix:
-        python-version: ["3.12", "3.13"]
+        python-version: ["3.14"]
     steps:
       - name: Check out the repository
         uses: actions/checkout@v4
