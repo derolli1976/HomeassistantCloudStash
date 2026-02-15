@@ -1,4 +1,4 @@
-# CloudStash – S3-kompatibles Backup für Home Assistant
+# CloudStash
 
 *[English Version](README.md)*
 
@@ -8,183 +8,133 @@
 
 [![Home Assistant](https://img.shields.io/badge/Home%20Assistant-Kompatibel-blue?style=for-the-badge&logo=home-assistant)](https://www.home-assistant.io/)
 [![HACS](https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge)](https://github.com/hacs/integration)
-[![Lizenz](https://img.shields.io/github/license/derolli1976/HomeassistantS3CompatibleBackup?style=for-the-badge)](LICENSE)
-[![GitHub Sterne](https://img.shields.io/github/stars/derolli1976/HomeassistantS3CompatibleBackup?style=for-the-badge)](https://github.com/derolli1976/HomeassistantS3CompatibleBackup/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/derolli1976/HomeassistantS3CompatibleBackup?style=for-the-badge)](https://github.com/derolli1976/HomeassistantS3CompatibleBackup/issues)
+[![Lizenz](https://img.shields.io/github/license/derolli1976/HomeassistantCloudStash?style=for-the-badge)](LICENSE)
+[![GitHub Sterne](https://img.shields.io/github/stars/derolli1976/HomeassistantCloudStash?style=for-the-badge)](https://github.com/derolli1976/HomeassistantCloudStash/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/derolli1976/HomeassistantCloudStash?style=for-the-badge)](https://github.com/derolli1976/HomeassistantCloudStash/issues)
 
-CloudStash erweitert die eingebaute Backup-Funktion von Home Assistant um Unterstützung für **jeden S3-kompatiblen Speicher** – nicht nur AWS S3. Es funktioniert mit AWS S3, MinIO, Wasabi, Backblaze B2, DigitalOcean Spaces, Cloudflare R2, Synology C2, Garage und jedem anderen S3-kompatiblen Anbieter.
-
----
-
-## Schnellstart
-
-1. Installation über HACS oder manuell (siehe [Installation](#installation))
-2. Home Assistant neustarten
-3. **Einstellungen** > **Geräte & Dienste** > **Integration hinzufügen**
-4. Nach **"CloudStash"** suchen
-5. Zugangsdaten eingeben (Access Key ID, Secret Access Key, Bucket-Name, Endpoint URL, Region)
-6. **Einstellungen** > **System** > **Backups** > S3-Speicher als Backup-Ziel auswählen
+Sichere deine Home Assistant Backups in der Cloud. CloudStash verbindet das Backup-System von Home Assistant mit jedem Objektspeicher, der das S3-Protokoll versteht, und gibt dir damit ein zuverlässiges externes Ziel für deine Daten.
 
 ---
 
-## Funktionen
+## Was CloudStash macht
 
-- **Vollständige Backup-Unterstützung** – Hochladen, Herunterladen, Auflisten und Löschen
-- **Multipart-Upload** – Effiziente Verarbeitung großer Backups (>20 MB)
-- **Region-Unterstützung** – Jede S3-Region konfigurierbar
-- **Benutzerdefinierte Endpunkte** – Funktioniert mit jeder S3-kompatiblen API
-- **Sicher** – Authentifizierung über Access Key ID + Secret Access Key
-- **Asynchron** – Nicht-blockierende Operationen mit aiobotocore
-- **Caching** – Backup-Auflistung wird 5 Minuten gecacht
-- **Re-Authentifizierung** – Automatische Aufforderung bei abgelaufenen Zugangsdaten
-- **Rekonfiguration** – Einstellungen ändern ohne die Integration zu entfernen
+CloudStash meldet sich als **Backup-Agent** in Home Assistant an. Nach der Einrichtung taucht es als zusätzlicher Speicherort unter **Einstellungen > System > Backups** auf. Jedes Backup, das du erstellst, kann von dort direkt in deinen Objektspeicher geschickt werden.
+
+Die Integration beherrscht alle gängigen Aktionen: neue Backups hochladen, vorhandene herunterladen, die Liste durchsuchen und alte Archive löschen. Große Dateien werden in Blöcken übertragen, damit der Speicherverbrauch auch bei Backups im Gigabyte-Bereich niedrig bleibt.
+
+---
+
+## Unterstützte Anbieter
+
+CloudStash arbeitet mit jedem Dienst oder jeder Software zusammen, die das S3-API implementiert:
+
+| Anbieter | Endpunkt-Schema | Typische Region |
+|----------|----------------|-----------------|
+| AWS S3 | `https://s3.<region>.amazonaws.com` | `eu-central-1` |
+| MinIO | `http://<host>:9000` | `us-east-1` |
+| Wasabi | `https://s3.<region>.wasabisys.com` | `eu-central-1` |
+| Backblaze B2 | `https://s3.<region>.backblazeb2.com` | aus URL, z.B. `us-west-004` |
+| Cloudflare R2 | `https://<account>.r2.cloudflarestorage.com` | `auto` |
+| DigitalOcean Spaces | `https://<region>.digitaloceanspaces.com` | `fra1` |
+| Synology C2 | `https://eu-002.s3.synologyc2.net` | `eu-002` |
+| Garage | `http://<host>:3900` | muss zu `garage.toml` passen |
+
+Andere S3-kompatible Dienste sollten genauso funktionieren -- *Endpunkt-URL + Region + Zugangsdaten* reichen aus.
 
 ---
 
 ## Installation
 
-### HACS (Empfohlen)
+### Über HACS
 
-[![Öffne deine Home Assistant Instanz und öffne ein Repository im Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=derolli1976&repository=HomeassistantS3CompatibleBackup&category=integration)
+[![Öffne deine Home Assistant Instanz und öffne ein Repository im Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=derolli1976&repository=HomeassistantCloudStash&category=integration)
 
-1. Öffne **HACS** in Home Assistant
-2. Gehe zu **Integrationen**
-3. Klicke auf das Menü > **Benutzerdefinierte Repositories**
-4. Repository-URL `https://github.com/derolli1976/HomeassistantS3CompatibleBackup` mit Kategorie **Integration** hinzufügen
-5. Klicke **Installieren**
-6. Home Assistant neustarten
+1. In Home Assistant **HACS > Integrationen** öffnen
+2. Über das Drei-Punkte-Menü **Benutzerdefinierte Repositories** wählen
+3. `https://github.com/derolli1976/HomeassistantCloudStash` einfügen, Kategorie **Integration** auswählen und bestätigen
+4. **CloudStash** installieren und Home Assistant neu starten
 
-### Manuelle Installation
+### Manuell
 
-```bash
-cd /config/custom_components
-git clone https://github.com/derolli1976/HomeassistantS3CompatibleBackup.git cloudstash
-```
-
-Dann Home Assistant neustarten.
+Den Ordner `custom_components/cloudstash` in dein Home Assistant `config/custom_components/`-Verzeichnis kopieren und neu starten.
 
 ---
 
-## Konfiguration
+## Einrichtung
 
-Gehe zu **Einstellungen** > **Geräte & Dienste** > **Integration hinzufügen** und suche nach **"CloudStash"**.
+Nach der Installation die Integration über **Einstellungen > Geräte & Dienste > Integration hinzufügen** hinzufügen und nach **CloudStash** suchen.
 
-| Feld | Beschreibung | Beispiel |
-|------|--------------|----------|
-| Access Key ID | Dein S3 Access Key | `AKIAIOSFODNN7EXAMPLE` |
-| Secret Access Key | Dein S3 Secret Key | `wJalrXUtnFEMI/K7MDENG/...` |
-| Bucket-Name | Ziel-Bucket (muss existieren) | `meine-ha-backups` |
-| Endpoint URL | S3-kompatibler Endpunkt | `https://s3.eu-central-1.amazonaws.com` |
-| Region | Speicher-Region | `eu-central-1` |
-| Speicher-Präfix | Stammordner für Backups (optional) | `homeassistant` |
+Folgende Angaben werden benötigt:
 
----
+| Parameter | Was eintragen |
+|-----------|--------------|
+| **Access Key ID** | Wird vom Speicheranbieter oder selbst gehosteten Server bereitgestellt |
+| **Secret Access Key** | Das zugehörige Geheimnis zum Key |
+| **Bucket** | Name eines bestehenden Buckets, in dem Backups abgelegt werden |
+| **Endpunkt-URL** | Vollständige URL zum S3-kompatiblen API (siehe Tabelle oben) |
+| **Region** | Regions-Kennung, z.B. `eu-central-1` (Standard: `us-east-1`) |
+| **Präfix** | Optionaler Ordnerpräfix im Bucket (Standard: `homeassistant`) |
 
-## Nutzung
+CloudStash prüft die Verbindung während der Einrichtung. Wenn Zugangsdaten oder Endpunkt nicht stimmen, erscheint eine klare Fehlermeldung.
 
-Nach der Konfiguration erscheint die Integration als Backup-Speicherort in Home Assistant. Gehe zu **Einstellungen** > **System** > **Backups**, erstelle ein neues Backup und wähle deinen S3-Speicher.
-
-### Backup-Struktur
-
-```
-mein-bucket/
-└── homeassistant/           # Speicher-Präfix (konfigurierbar)
-    └── backups/
-        ├── backup-abc123.tar
-        ├── backup-abc123.metadata.json
-        └── ...
-```
-
-Jedes Backup besteht aus zwei Dateien: dem `.tar`-Archiv und einer `.metadata.json`-Datei mit Metadaten für Home Assistant. Der Speicher-Präfix ermöglicht es, einen Bucket für mehrere HA-Instanzen oder andere Anwendungen gemeinsam zu nutzen.
+Nach der Ersteinrichtung lassen sich Zugangsdaten über **Neu konfigurieren** ändern oder über automatische **Re-Authentifizierung** aktualisieren, wenn Schlüssel ablaufen.
 
 ---
 
-## Anbieter-Endpunkt-Referenz
+## Wie Backups gespeichert werden
 
-Die folgende Tabelle zeigt die Endpoint URL und Region, die du für jeden Anbieter eingeben musst. Die Einrichtung von Bucket und Zugangsdaten entnimmst du der Dokumentation deines Anbieters.
+```
+<bucket>/
+  <prefix>/
+    backups/
+      <backup-id>.tar
+      <backup-id>.metadata.json
+```
 
-| Anbieter | Endpoint URL | Region | Hinweise |
-|----------|-------------|--------|----------|
-| **AWS S3** | `https://s3.<region>.amazonaws.com` | z.B. `eu-central-1` | [Vollständige Endpunktliste](https://docs.aws.amazon.com/general/latest/gr/s3.html) |
-| **MinIO** | `http://<dein-server>:9000` | `us-east-1` | Standard-Region für MinIO |
-| **Wasabi** | `https://s3.<region>.wasabisys.com` | z.B. `eu-central-1` | [Regionsliste](https://docs.wasabi.com/docs/what-are-the-service-urls-for-wasabis-different-storage-regions) |
-| **Backblaze B2** | `https://s3.<region>.backblazeb2.com` | Aus URL extrahieren, z.B. `us-west-004` | Region muss zum Endpunkt passen |
-| **DigitalOcean Spaces** | `https://<region>.digitaloceanspaces.com` | z.B. `fra1` | |
-| **Cloudflare R2** | `https://<account-id>.r2.cloudflarestorage.com` | `auto` | |
-| **Synology C2** | `https://eu-002.s3.synologyc2.net` | z.B. `eu-002` | Auch `us-001`, `tw-001` |
-| **Garage** | `http://<dein-server>:3900` | `garage` | Region **muss** mit `garage.toml` übereinstimmen; `us-east-1` führt zu Auth-Fehlern |
+Jedes Backup erzeugt zwei Objekte: das Archiv selbst und eine kleine JSON-Sidecar-Datei mit Metadaten, die Home Assistant zum Auflisten und Wiederherstellen braucht. Der konfigurierbare Präfix hält die CloudStash-Daten von allem anderen im Bucket getrennt.
 
-### Erforderliche S3-Berechtigungen
+---
 
-Deine Zugangsdaten benötigen diese Berechtigungen (gilt für alle Anbieter):
+## Benötigte Berechtigungen
 
-| Berechtigung | Zweck |
-|--------------|-------|
-| `s3:PutObject` | Backup-Dateien hochladen |
-| `s3:GetObject` | Backups herunterladen/wiederherstellen |
-| `s3:DeleteObject` | Alte Backups löschen |
-| `s3:ListBucket` | Verfügbare Backups auflisten |
-| `s3:AbortMultipartUpload` | Fehlgeschlagene Uploads abbrechen |
-| `s3:ListMultipartUploadParts` | Multipart-Uploads fortsetzen |
-
-**AWS IAM Policy Beispiel** (`DEIN-BUCKET-NAME` ersetzen):
+Die verwendeten Zugangsdaten brauchen Lese- und Schreibzugriff auf den Bucket. Für AWS sieht die minimale IAM-Policy so aus (`BUCKET` ersetzen):
 
 ```json
 {
   "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:PutObject",
-        "s3:GetObject",
-        "s3:DeleteObject",
-        "s3:ListBucket",
-        "s3:AbortMultipartUpload",
-        "s3:ListMultipartUploadParts"
-      ],
-      "Resource": [
-        "arn:aws:s3:::DEIN-BUCKET-NAME",
-        "arn:aws:s3:::DEIN-BUCKET-NAME/*"
-      ]
-    }
-  ]
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": [
+      "s3:PutObject",
+      "s3:GetObject",
+      "s3:DeleteObject",
+      "s3:ListBucket",
+      "s3:AbortMultipartUpload",
+      "s3:ListMultipartUploadParts"
+    ],
+    "Resource": [
+      "arn:aws:s3:::BUCKET",
+      "arn:aws:s3:::BUCKET/*"
+    ]
+  }]
 }
 ```
+
+Andere Anbieter haben eigene Berechtigungssysteme, aber die nötigen Operationen sind dieselben: Objekte im Bucket auflisten, lesen, schreiben und löschen.
 
 ---
 
 ## Fehlerbehebung
 
-### "Ungültige Zugangsdaten"
+**Verbindung schlägt fehl** -- Endpunkt-URL prüfen und sicherstellen, dass Home Assistant den Host erreichen kann. Bei selbst gehosteten Diensten kontrollieren, ob der Server läuft und auf dem konfigurierten Port erreichbar ist.
 
-- Prüfe Access Key ID und Secret Access Key
-- Stelle sicher, dass die Zugangsdaten die erforderlichen Berechtigungen haben und nicht abgelaufen sind
+**Zugangsdaten abgelehnt** -- Access Key und Secret auf Richtigkeit prüfen. Sicherstellen, dass der Schlüssel aktiv ist und die nötigen Berechtigungen hat.
 
-### "Verbindung nicht möglich"
+**Bucket nicht gefunden** -- CloudStash legt keine Buckets an. Der Bucket muss vor der Einrichtung bereits existieren.
 
-- Prüfe die Endpoint-URL und deine Netzwerk-/Firewall-Regeln
-- Bei selbst gehosteten Lösungen stelle sicher, dass der Server läuft
+**Backups erscheinen nicht sofort** -- Die Backup-Liste wird bis zu fünf Minuten gecacht. Entweder warten oder im Home Assistant Log nach Fehlern schauen.
 
-### "Ungültiger Bucket-Name"
-
-- Bucket-Namen müssen kleingeschrieben sein, 3-63 Zeichen, nur Buchstaben, Zahlen und Bindestriche
-- Der Bucket muss bereits existieren (CloudStash erstellt keine Buckets)
-
-### "Ungültige Endpoint-URL"
-
-- Die URL muss mit `http://` oder `https://` beginnen
-- Prüfe, ob die Region zum Endpunkt passt
-
-### Backups werden nicht angezeigt
-
-- Die Backup-Liste wird bis zu 5 Minuten gecacht
-- Prüfe die Home Assistant Logs auf Fehler
-- Stelle sicher, dass der Bucket `.metadata.json`-Dateien enthält
-
-### Debug-Logging
-
-In `configuration.yaml` eintragen:
+**Debug-Logging** -- Folgendes in `configuration.yaml` eintragen:
 
 ```yaml
 logger:
@@ -195,24 +145,10 @@ logger:
 
 ---
 
-## Speicheranbieter-Vergleich
-
-| Anbieter | Kostenlose Stufe | Egress-Gebühren | Min. Speichergebühr | S3-kompatibel |
-|----------|------------------|-----------------|---------------------|---------------|
-| AWS S3 | 5 GB (12 Monate) | Ja | Nein | Nativ |
-| Backblaze B2 | 10 GB | Kostenlos bis 3x Speicher | Nein | Ja |
-| Wasabi | Nein | Nein | Ja (1 TB min) | Ja |
-| Cloudflare R2 | 10 GB | Nein | Nein | Ja |
-| DigitalOcean Spaces | Nein | Ja | 5$/Monat | Ja |
-| MinIO | Selbst gehostet | N/A | N/A | Ja |
-| Garage | Selbst gehostet | N/A | N/A | Ja |
-
----
-
 ## Lizenz
 
-MIT-Lizenz – siehe [LICENSE](LICENSE) für Details.
+MIT -- siehe [LICENSE](LICENSE).
 
 ## Mitwirken
 
-Beiträge sind willkommen. Bitte öffne ein Issue oder einen Pull Request.
+Fehlermeldungen und Pull Requests sind über GitHub willkommen.

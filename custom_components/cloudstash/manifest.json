@@ -8,12 +8,12 @@
   "dependencies": [
     "backup"
   ],
-  "documentation": "https://github.com/derolli1976/HomeassistantS3CompatibleBackup",
+  "documentation": "https://github.com/derolli1976/HomeassistantCloudStash",
   "integration_type": "service",
   "iot_class": "cloud_push",
-  "issue_tracker": "https://github.com/derolli1976/HomeassistantS3CompatibleBackup/issues",
+  "issue_tracker": "https://github.com/derolli1976/HomeassistantCloudStash/issues",
   "requirements": [
     "aiobotocore>=2.6.0,<3.0.0"
   ],
-  "version": "0.1.5"
+  "version": "1.0.0"
 }

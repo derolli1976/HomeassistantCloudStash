@@ -2,81 +2,81 @@
   "config": {
     "step": {
       "user": {
-        "title": "S3 Speicher Konfiguration",
-        "description": "Konfigurieren Sie Ihren S3-kompatiblen Speicher für Backups. Dies funktioniert mit jedem S3-kompatiblen Speicheranbieter (AWS S3, MinIO, Wasabi, Backblaze B2, etc.).",
+        "title": "Mit CloudStash verbinden",
+        "description": "Gib die Verbindungsdaten deines Objektspeichers ein. CloudStash funktioniert mit jedem Anbieter, der eine S3-kompatible API bereitstellt.",
         "data": {
-          "access_key_id": "Access Key ID",
-          "secret_access_key": "Secret Access Key",
-          "bucket": "Bucket-Name",
-          "endpoint_url": "Endpoint-URL",
+          "access_key_id": "Zugangschlüssel",
+          "secret_access_key": "Geheimer Schlüssel",
+          "bucket": "Bucket",
+          "endpoint_url": "Endpunkt-URL",
           "region": "Region",
-          "prefix": "Speicher-Präfix"
+          "prefix": "Präfix"
         },
         "data_description": {
-          "access_key_id": "Die Access Key ID für Ihren S3-kompatiblen Speicher.",
-          "secret_access_key": "Der Secret Access Key für Ihren S3-kompatiblen Speicher.",
-          "bucket": "Der Bucket-Name, in dem Backups gespeichert werden. Der Bucket muss bereits existieren und beschreibbar sein.",
-          "endpoint_url": "Die Endpoint-URL Ihres S3-kompatiblen Speichers (z.B. https://s3.eu-central-1.amazonaws.com oder https://ihr-minio-server:9000).",
-          "region": "Die Region Ihres S3-kompatiblen Speichers (z.B. us-east-1, eu-central-1).",
-          "prefix": "Der Stammordner für Backups im Bucket. Backups werden unter {prefix}/backups/ gespeichert. Standard: homeassistant"
+          "access_key_id": "Der Zugangschlüssel von deinem Speicherdienst.",
+          "secret_access_key": "Das Geheimnis, das zum Zugangschlüssel gehört.",
+          "bucket": "Name eines bestehenden Buckets. CloudStash legt keinen neuen an.",
+          "endpoint_url": "Vollständige URL zur S3-kompatiblen API deines Anbieters, z.B. https://s3.eu-central-1.amazonaws.com.",
+          "region": "Regions-Kennung, z.B. eu-central-1. Im Zweifel in der Dokumentation deines Anbieters nachschauen.",
+          "prefix": "Ordnerpräfix im Bucket. Backups landen unter {prefix}/backups/. Nur ändern, wenn nötig."
         }
       },
       "reauth_confirm": {
-        "title": "S3 Speicher erneut authentifizieren",
-        "description": "Die Zugangsdaten für {bucket} sind nicht mehr gültig. Bitte geben Sie neue Zugangsdaten ein.",
+        "title": "CloudStash-Zugangsdaten aktualisieren",
+        "description": "Die gespeicherten Zugangsdaten für Bucket {bucket} werden nicht mehr akzeptiert. Bitte gib gültige Zugangsdaten ein.",
         "data": {
-          "access_key_id": "Access Key ID",
-          "secret_access_key": "Secret Access Key"
+          "access_key_id": "Zugangschlüssel",
+          "secret_access_key": "Geheimer Schlüssel"
         },
         "data_description": {
-          "access_key_id": "Die neue Access Key ID für Ihren S3-kompatiblen Speicher.",
-          "secret_access_key": "Der neue Secret Access Key für Ihren S3-kompatiblen Speicher."
+          "access_key_id": "Dein neuer oder aktualisierter Zugangschlüssel.",
+          "secret_access_key": "Der dazugehörige geheime Schlüssel."
         }
       },
       "reconfigure": {
-        "title": "S3 Speicher neu konfigurieren",
-        "description": "Aktualisieren Sie die Konfiguration Ihres S3-kompatiblen Speichers.",
+        "title": "CloudStash-Einstellungen bearbeiten",
+        "description": "Beliebige Verbindungsparameter unten anpassen. Die Verbindung wird vor dem Speichern geprüft.",
         "data": {
-          "access_key_id": "Access Key ID",
-          "secret_access_key": "Secret Access Key",
-          "bucket": "Bucket-Name",
-          "endpoint_url": "Endpoint-URL",
+          "access_key_id": "Zugangschlüssel",
+          "secret_access_key": "Geheimer Schlüssel",
+          "bucket": "Bucket",
+          "endpoint_url": "Endpunkt-URL",
           "region": "Region",
-          "prefix": "Speicher-Präfix"
+          "prefix": "Präfix"
         },
         "data_description": {
-          "access_key_id": "Die Access Key ID für Ihren S3-kompatiblen Speicher.",
-          "secret_access_key": "Der Secret Access Key für Ihren S3-kompatiblen Speicher.",
-          "bucket": "Der Bucket-Name, in dem Backups gespeichert werden. Der Bucket muss bereits existieren und beschreibbar sein.",
-          "endpoint_url": "Die Endpoint-URL Ihres S3-kompatiblen Speichers (z.B. https://s3.eu-central-1.amazonaws.com oder https://ihr-minio-server:9000).",
-          "region": "Die Region Ihres S3-kompatiblen Speichers (z.B. us-east-1, eu-central-1).",
-          "prefix": "Der Stammordner für Backups im Bucket. Backups werden unter {prefix}/backups/ gespeichert. Standard: homeassistant"
+          "access_key_id": "Der Zugangschlüssel von deinem Speicherdienst.",
+          "secret_access_key": "Das Geheimnis, das zum Zugangschlüssel gehört.",
+          "bucket": "Name eines bestehenden Buckets. CloudStash legt keinen neuen an.",
+          "endpoint_url": "Vollständige URL zur S3-kompatiblen API deines Anbieters.",
+          "region": "Regions-Kennung, z.B. eu-central-1.",
+          "prefix": "Ordnerpräfix im Bucket. Backups landen unter {prefix}/backups/."
         }
       }
     },
     "error": {
-      "cannot_connect": "Verbindung zum S3-Endpoint fehlgeschlagen. Bitte überprüfen Sie die Endpoint-URL und Ihre Netzwerkverbindung.",
-      "invalid_bucket_name": "Ungültiger Bucket-Name. Bitte überprüfen Sie das Format des Bucket-Namens.",
-      "invalid_credentials": "Ungültige Anmeldedaten. Auf den Bucket kann mit der angegebenen Access Key ID und dem Secret Access Key nicht zugegriffen werden.",
-      "invalid_endpoint_url": "Ungültige Endpoint-URL. Bitte geben Sie eine gültige URL an."
+      "cannot_connect": "Der Speicher-Endpunkt ist nicht erreichbar. URL prüfen und sicherstellen, dass der Host aus diesem Netzwerk erreichbar ist.",
+      "invalid_bucket_name": "Der Bucket-Name ist ungültig. Namen müssen kleingeschrieben sein, 3-63 Zeichen, nur Buchstaben, Ziffern und Bindestriche.",
+      "invalid_credentials": "Zugriff verweigert. Das angegebene Schlüsselpaar hat keine Berechtigung für diesen Bucket.",
+      "invalid_endpoint_url": "Die Endpunkt-URL ist fehlerhaft. Sie muss mit http:// oder https:// beginnen."
     },
     "abort": {
-      "already_configured": "Diese Bucket- und Endpoint-Kombination ist bereits konfiguriert.",
-      "reauth_successful": "Die erneute Authentifizierung war erfolgreich."
+      "already_configured": "Ein CloudStash-Eintrag für diesen Bucket und Endpunkt existiert bereits.",
+      "reauth_successful": "Zugangsdaten erfolgreich aktualisiert."
     }
   },
   "exceptions": {
     "cannot_connect": {
-      "message": "Verbindung zum S3-Endpoint fehlgeschlagen."
+      "message": "CloudStash kann den Speicher-Endpunkt nicht erreichen."
     },
     "invalid_bucket_name": {
-      "message": "Ungültiger Bucket-Name."
+      "message": "Der Bucket-Name ist ungültig."
     },
     "invalid_credentials": {
-      "message": "Ungültige Anmeldedaten für den S3-Bucket."
+      "message": "Zugriff auf den konfigurierten Bucket verweigert."
     },
     "invalid_endpoint_url": {
-      "message": "Ungültige Endpoint-URL."
+      "message": "Die Endpunkt-URL ist fehlerhaft."
     }
   }
 }

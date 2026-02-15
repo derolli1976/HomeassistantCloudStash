@@ -8,7 +8,7 @@ Dieses Dokument fasst den aktuellen Stand des Projekts zusammen, damit die Arbei
 
 **Name:** CloudStash – S3 Compatible Backup for Home Assistant
 **Domain:** `cloudstash`
-**Version:** 0.1.5
+**Version:** 1.0.0
 **Mindestversion HA:** 2025.2.0
 **Abhängigkeit:** `aiobotocore>=2.6.0,<3.0.0`
 **Codeowner:** `@derolli1976`
@@ -41,11 +41,9 @@ CloudStash ist ein Home Assistant `BackupAgent`, der Backups in jedem S3-kompati
 ├── hacs.json                     # HACS-Konfiguration
 ├── icon.svg                      # CloudStash-Icon (ohne Text)
 ├── logo.svg                      # CloudStash-Logo (mit Text)
-├── CHANGELOG.md                  # Bisheriger Changelog (deutsch)
+├── CHANGELOG.md                  # Changelog (deutsch)
 ├── README.md                     # Englische Doku
 ├── README_DE.md                  # Deutsche Doku
-├── RELEASE.md                    # Release-Prozess-Doku
-├── release.py                    # Release-Automatisierung (Version bump, Tag, Push, GH Release)
 ├── LICENSE
 ├── .gitignore
 └── .gitattributes
@@ -176,22 +174,21 @@ Komplette Umstrukturierung aller 4 Python-Dateien, damit der Code nicht mehr als
 
 ## 5. Offene Punkte / Nächste Schritte
 
-### Beim Umzug ins neue Repository
+### Umzug ins neue Repository ✅ erledigt
 
-1. **Neues GitHub-Repo erstellen** (z.B. `derolli1976/cloudstash` o.ä.)
-2. **Ohne Fork-Beziehung** – frisches `git init`, Dateien kopieren, initialen Commit machen
-3. **Links in folgenden Dateien anpassen** (falls Repo-Name sich ändert):
-   - `custom_components/cloudstash/manifest.json` → `documentation` und `issue_tracker`
-   - `README.md` und `README_DE.md` → alle GitHub-Links, Badges, HACS-Button
-   - `RELEASE.md` → GitHub-Links
-   - `release.py` → GitHub-Links (Repo-Name ist dort hardcoded)
-4. **GitHub Topics setzen:** `home-assistant`, `hacs`, `s3`, `backup`, `home-assistant-custom-component`
-5. **CHANGELOG.md** – ggf. bereinigen/neu starten für das neue Repo
+Das Projekt wurde in das Repository `derolli1976/HomeassistantCloudStash` umgezogen.
+Alle Links in den folgenden Dateien wurden aktualisiert:
+- `custom_components/cloudstash/manifest.json` → `documentation` und `issue_tracker`
+- `README.md` und `README_DE.md` → alle GitHub-Links, Badges, HACS-Button
+
+`release.py` und `RELEASE.md` wurden entfernt. Releases werden manuell über GitHub erstellt.
+
+**GitHub Topics setzen:** `home-assistant`, `hacs`, `s3`, `backup`, `home-assistant-custom-component`
 
 ### Inhaltliche Weiterentwicklung
 
 - **Tests:** Aktuell gibt es keine Unit-/Integrationstests. pytest + `pytest-homeassistant-custom-component` wäre der nächste logische Schritt.
-- **Version bump:** Nächstes Release sollte die umfangreichen Refactoring-Änderungen widerspiegeln (z.B. 0.2.0).
+- **Version:** 1.0.0 ist das initiale Release im neuen Repository.
 - **Translations:** Weitere Sprachen bei Bedarf.
 - **HACS Default-Repository:** Nach ausreichender Nutzung und Stabilität kann ein PR ans HACS-Default-Repo gestellt werden.
 
@@ -199,13 +196,12 @@ Komplette Umstrukturierung aller 4 Python-Dateien, damit der Code nicht mehr als
 
 ## 6. Build & Release
 
-Das `release.py`-Skript automatisiert den Release-Prozess:
+Releases werden manuell über GitHub erstellt:
 
-```bash
-python release.py 0.2.0
-```
-
-Es aktualisiert die Version in `manifest.json`, erstellt Commit + Tag, pushed und erstellt ein GitHub Release (benötigt `gh` CLI).
+1. Version in `custom_components/cloudstash/manifest.json` aktualisieren
+2. CHANGELOG.md ergänzen
+3. Commit + Tag erstellen (`git tag v1.x.x`)
+4. Push + GitHub Release anlegen
 
 ---
 
@@ -220,34 +216,9 @@ Es aktualisiert die Version in `manifest.json`, erstellt Commit + Tag, pushed un
 
 ## 8. Schritte zum Umzug in ein neues Repository
 
-```bash
-# 1. Neuen Ordner vorbereiten
-mkdir cloudstash && cd cloudstash
-git init
-
-# 2. Alle Dateien aus dem aktuellen Projekt kopieren (OHNE .git/)
-#    Am besten: alles außer .git/ kopieren
-robocopy "E:\Github\HomeassistantS3CompatibleBackup" . /E /XD .git
-
-# 3. Diese Übergabedokumentation entfernen (wird nicht mehr gebraucht)
-del DEVELOPMENT_STATUS.md
-
-# 4. Links anpassen falls Repo-Name anders ist (Suchen+Ersetzen)
-#    "derolli1976/HomeassistantS3CompatibleBackup" → "derolli1976/NEUER_NAME"
-
-# 5. Initialer Commit
-git add .
-git commit -m "Initial commit – CloudStash v0.2.0"
-
-# 6. Remote setzen und pushen
-git remote add origin https://github.com/derolli1976/NEUER_NAME.git
-git branch -M main
-git push -u origin main
-
-# 7. GitHub Topics setzen (im Browser oder via gh CLI)
-gh repo edit --add-topic home-assistant,hacs,s3,backup,home-assistant-custom-component
-```
+> **Erledigt.** Das Projekt befindet sich jetzt in `derolli1976/HomeassistantCloudStash`.
+> Alle Links wurden am 13. Februar 2026 aktualisiert.
 
 ---
 
-*Erstellt am 13. Februar 2026*
+*Erstellt am 13. Februar 2026 · Aktualisiert am 13. Februar 2026 (Umzug nach HomeassistantCloudStash)*

@@ -79,3 +79,7 @@ dmypy.json
 
 # Benchmarks
 .benchmarks/
+
+# Brand asset generation (helper script + output)
+generate_brands.py
+brands/
