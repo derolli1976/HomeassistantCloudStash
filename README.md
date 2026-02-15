@@ -11,6 +11,7 @@
 [![Pytest](https://github.com/derolli1976/HomeassistantCloudStash/actions/workflows/tests.yml/badge.svg)](https://github.com/derolli1976/HomeassistantCloudStash/actions/workflows/tests.yml)
 [![Hassfest](https://github.com/derolli1976/HomeassistantCloudStash/actions/workflows/hassfest.yml/badge.svg)](https://github.com/derolli1976/HomeassistantCloudStash/actions/workflows/hassfest.yml)
 [![HACS Validation](https://github.com/derolli1976/HomeassistantCloudStash/actions/workflows/hacs.yml/badge.svg)](https://github.com/derolli1976/HomeassistantCloudStash/actions/workflows/hacs.yml)
+[![CodeQL](https://github.com/derolli1976/HomeassistantCloudStash/actions/workflows/codeql.yml/badge.svg)](https://github.com/derolli1976/HomeassistantCloudStash/actions/workflows/codeql.yml)
 
 Store your Home Assistant backups in the cloud. CloudStash connects Home Assistant's backup system to any object storage that speaks the S3 protocol, giving you a reliable off-site destination for your data.
 
