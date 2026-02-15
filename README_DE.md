@@ -6,11 +6,11 @@
   <img src="logo.svg" alt="CloudStash Logo" width="200">
 </p>
 
-[![Home Assistant](https://img.shields.io/badge/Home%20Assistant-Kompatibel-blue?style=for-the-badge&logo=home-assistant)](https://www.home-assistant.io/)
-[![HACS](https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge)](https://github.com/hacs/integration)
-[![Lizenz](https://img.shields.io/github/license/derolli1976/HomeassistantCloudStash?style=for-the-badge)](LICENSE)
-[![GitHub Sterne](https://img.shields.io/github/stars/derolli1976/HomeassistantCloudStash?style=for-the-badge)](https://github.com/derolli1976/HomeassistantCloudStash/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/derolli1976/HomeassistantCloudStash?style=for-the-badge)](https://github.com/derolli1976/HomeassistantCloudStash/issues)
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
+[![GitHub release](https://img.shields.io/github/release/derolli1976/HomeassistantCloudStash.svg)](https://github.com/derolli1976/HomeassistantCloudStash/releases)
+[![Pytest](https://github.com/derolli1976/HomeassistantCloudStash/actions/workflows/tests.yml/badge.svg)](https://github.com/derolli1976/HomeassistantCloudStash/actions/workflows/tests.yml)
+[![Hassfest](https://github.com/derolli1976/HomeassistantCloudStash/actions/workflows/hassfest.yml/badge.svg)](https://github.com/derolli1976/HomeassistantCloudStash/actions/workflows/hassfest.yml)
+[![HACS Validation](https://github.com/derolli1976/HomeassistantCloudStash/actions/workflows/hacs.yml/badge.svg)](https://github.com/derolli1976/HomeassistantCloudStash/actions/workflows/hacs.yml)
 
 Sichere deine Home Assistant Backups in der Cloud. CloudStash verbindet das Backup-System von Home Assistant mit jedem Objektspeicher, der das S3-Protokoll versteht, und gibt dir damit ein zuverlässiges externes Ziel für deine Daten.
 
