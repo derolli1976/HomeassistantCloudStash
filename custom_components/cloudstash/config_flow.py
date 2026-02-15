@@ -102,6 +102,14 @@ SCHEMA_FULL_EDIT = vol.Schema(
 )
 
 
+def _normalise_endpoint(url: str) -> str:
+    """Ensure the endpoint URL starts with a scheme (default: https://)."""
+    url = url.strip().rstrip("/")
+    if not url.lower().startswith(("http://", "https://")):
+        url = f"https://{url}"
+    return url
+
+
 # ---------------------------------------------------------------------------
 # Config flow
 # ---------------------------------------------------------------------------
@@ -121,6 +129,7 @@ class CloudStashConfigFlow(ConfigFlow, domain=DOMAIN):
         errors: dict[str, str] = {}
 
         if user_input is not None:
+            user_input[OPT_ENDPOINT] = _normalise_endpoint(user_input[OPT_ENDPOINT])
             self._async_abort_entries_match(
                 {OPT_BUCKET: user_input[OPT_BUCKET], OPT_ENDPOINT: user_input[OPT_ENDPOINT]}
             )
@@ -181,6 +190,7 @@ class CloudStashConfigFlow(ConfigFlow, domain=DOMAIN):
         target = self._get_reconfigure_entry()
 
         if user_input is not None:
+            user_input[OPT_ENDPOINT] = _normalise_endpoint(user_input[OPT_ENDPOINT])
             self._async_abort_entries_match(
                 {OPT_BUCKET: user_input[OPT_BUCKET], OPT_ENDPOINT: user_input[OPT_ENDPOINT]}
             )

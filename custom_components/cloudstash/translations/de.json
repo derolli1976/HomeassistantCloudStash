@@ -16,7 +16,7 @@
           "access_key_id": "Der Zugangschlüssel von deinem Speicherdienst.",
           "secret_access_key": "Das Geheimnis, das zum Zugangschlüssel gehört.",
           "bucket": "Name eines bestehenden Buckets. CloudStash legt keinen neuen an.",
-          "endpoint_url": "Vollständige URL zur S3-kompatiblen API deines Anbieters, z.B. https://s3.eu-central-1.amazonaws.com.",
+          "endpoint_url": "Vollständige URL zur S3-kompatiblen API deines Anbieters, inklusive Protokoll (HTTPS oder HTTP). Wird das Protokoll-Präfix weggelassen, wird automatisch HTTPS ergänzt.",
           "region": "Regions-Kennung, z.B. eu-central-1. Im Zweifel in der Dokumentation deines Anbieters nachschauen.",
           "prefix": "Ordnerpräfix im Bucket. Backups landen unter {prefix}/backups/. Nur ändern, wenn nötig."
         }
