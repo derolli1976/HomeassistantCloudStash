@@ -1,0 +1,43 @@
+name: ✨ Feature Request
+description: Suggestions for new features or improvements
+title: "[Feature] "
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for your suggestion! The clearer you describe it, the better we can evaluate and implement it.
+  - type: input
+    id: context
+    attributes:
+      label: What problem would you like to solve?
+      description: Describe the scenario or use case you want to improve.
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Your Proposal
+      description: What feature do you want? How should it work?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you have considered
+      description: Are there other solutions that could work for you?
+  - type: dropdown
+    id: provider_related
+    attributes:
+      label: Is this specific to a particular storage provider?
+      options:
+        - "No – applies to all providers"
+        - AWS S3
+        - MinIO
+        - Wasabi
+        - Backblaze B2
+        - Cloudflare R2
+        - Other
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional Context
+      description: Any other information, screenshots, or references that might be helpful.
