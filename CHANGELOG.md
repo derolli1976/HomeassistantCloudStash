@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Integration failed to install on Home Assistant 2026.8: HA now pins `botocore==1.42.97`, which no `aiobotocore` 2.x release supports. Requirement changed to `aiobotocore>=3.0.0,<4.0.0` (matching HA core's own `aws_s3` integration).
+- Integration failed to install on Home Assistant 2026.8: HA now pins `botocore==1.42.97`, which no `aiobotocore` 2.x release supports. The upper bound was raised to `aiobotocore>=2.6.0,<4.0.0`, so the resolver picks whichever `aiobotocore` release matches the `botocore` version pinned by the running Home Assistant core — 2.x on older releases, 3.x on 2026.8 and newer.
 
 ## [1.0.0] - 2026-02-15
 
