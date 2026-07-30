@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3] - 2026-07-30
+
+### Fixed
+
+- Integration failed to install on Home Assistant 2026.8: HA now pins `botocore==1.42.97`, which no `aiobotocore` 2.x release supports. Requirement changed to `aiobotocore>=3.0.0,<4.0.0` (matching HA core's own `aws_s3` integration).
+
 ## [1.0.0] - 2026-02-15
 
 ### 🎉 Initial Release
