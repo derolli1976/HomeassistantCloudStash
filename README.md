@@ -38,6 +38,7 @@ CloudStash works with any service or software that implements the S3 API:
 | Cloudflare R2 | `https://<account>.r2.cloudflarestorage.com` | `auto` |
 | DigitalOcean Spaces | `https://<region>.digitaloceanspaces.com` | `fra1` |
 | Synology C2 | `https://eu-002.s3.synologyc2.net` | `eu-002` |
+| Exoscale SOS | `https://sos-<zone>.exo.io` | zone name, e.g. `de-fra-1` |
 | Garage | `http://<host>:3900` | must match `garage.toml` |
 
 Other S3-compatible services should work the same way using *endpoint URL + region + credentials*.
